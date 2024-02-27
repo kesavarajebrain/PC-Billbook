@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <img src="../../assets/images/IMG_20210906_095300.jpg" alt="PC"><br>
+            <b>PC FINANCE</b>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <mat-card>
+                <form #loginForm="ngForm">
+                    <h4 class="text-center">LOGIN</h4>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Enter Password Here!" type="password"
+                            [(ngModel)]="loginData.password" name="password" #password="ngModel" required  [type]="hide ? 'password' : 'text'" >
+                            <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </mat-form-field>
+                    <br>
+                    <p class="text-center">
+                        <button mat-raised-button color="primary" (click)="login()">PROCEED</button>
+                    </p>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

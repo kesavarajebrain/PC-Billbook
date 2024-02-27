@@ -1,0 +1,97 @@
+<div class="container-fluid">
+    <div>
+        <h2 class="text-center">Transactions</h2>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4 class="text-capitalize">Name: <b> {{borrowerData.borrowerName}}</b></h4>
+            <h4 class="text-start"> Amt: <b>Rs.{{borrowerData.loanAmount}}/-</b></h4>
+        </div>
+        <div class="col">
+            <h4 class="text-capitalize">Date: <b> {{borrowerData.createdDate | date: 'dd/MM/yyyy'}}</b></h4>
+            <h4 class="text-start" *ngIf="afterNew">Dues: <b>Rs.{{totalDues}}/-</b></h4>
+        </div>
+    </div>
+    <div class="col">
+        <h4 class="text-capitalize text-center bal" *ngIf="afterNew">Balance: <b>Rs. {{borrowerData.loanAmount -
+                totalDues}} /-</b>
+            <br>
+            <small>{{borrowerData.loanAmount - totalDues | numberToWords}} Rupees Only!</small>
+        </h4>
+        <h5 class="text-start text-capitalize text-center" *ngIf="!afterNew">Close & Check</h5>
+    </div>
+    <div class="col text-center">
+        <a href="{{'tel:+91'+borrowerData.borrowerNumber}}" mat-raised-button class="call">
+            <mat-icon>call</mat-icon> Call {{borrowerData.borrowerName}}
+        </a>
+    </div>
+    <br>
+    <mat-card>
+        <form #transactionForm="ngForm">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Due Date</mat-label>
+                <input matInput [readonly]="true" matInput [matDatepicker]="picker" datePickerFormat="DD-MM-YYYY"
+                    [(ngModel)]="transactionData.dueDate" name="dueDate" #dueDate="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Due Amount</mat-label>
+                <input matInput placeholder="Enter Amount Here!" type="number" [(ngModel)]="transactionData.dueAmount"
+                    [(ngModel)]="Amount" (keypress)="numberOnly($event)" name="dueAmount" #dueAmount="ngModel" required>
+                <small *ngIf="Amount">{{Amount | numberToWords }} Rupees Only! </small>
+            </mat-form-field>
+            <p class="text-center">
+                <button mat-raised-button color="primary" (click)="saveTransaction()">Save</button>
+            </p>
+        </form>
+    </mat-card>
+    <br>
+    <mat-card>
+        <h3 class="text-center">Find Record</h3>
+        <mat-form-field appearance="standard">
+            <mat-label>Find Amount</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search Here!" #input>
+        </mat-form-field>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="slno">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl.No </th>
+                    <td mat-cell *matCellDef="let element; let i = index">{{(paginatorRef.pageIndex *
+                        paginatorRef.pageSize) + i + 1}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="dueDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Due Date </th>
+                    <td mat-cell *matCellDef="let row" class="text-capitalize"> {{row.dueDate | date: 'dd/MM/yy'}} </td>
+                </ng-container>
+
+                <!-- Progress Column -->
+                <ng-container matColumnDef="dueAmount" class="text-right">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Due Amount </th>
+                    <td mat-cell *matCellDef="let row" class="text-right"><b> Rs.{{row.dueAmount}}/-</b> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+
+            <mat-paginator #paginatorRef [pageSizeOptions]="[5,10, 25, 50]" aria-label="Select page of users">
+            </mat-paginator>
+
+            <br>
+            <br>
+        </div>
+        <br>
+        <p  class="text-center" >
+            <button mat-raised-button color="warn" (click)="delBorrower()">	<mat-icon>delete</mat-icon> Borrower</button>
+        </p>
+    </mat-card>
+</div>

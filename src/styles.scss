@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 30px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.mat-drawer-inner-container {
+  background: white !important;
+}
+
+.mat-drawer-transition .mat-drawer-backdrop {
+  background-color: #0000008c !important;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%) !important;
+}
+
+mat-form-field {
+  width: 100% !important;
+}
+
+mat-sidenav{
+  width: 50% !important;
+}
+.mat-bottom-sheet-container{
+  border-radius: 20px 20px 0px 0px;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
