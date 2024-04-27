@@ -17,3 +17,35 @@
 </body>
 
 </html>
+
+<!-- /Error message "error:0308010C:digital envelope routines::unsupported" [SOLVED]
+
+// Here are two options now -
+
+// 1. Try to uninstall Node.js version 17+ and reinstall Node.js version 16+
+
+// You can re-install the current LTS Node.js version from their official site. Or more specific downloads from here;
+
+// You can use NVM (Node Version Manager)
+
+// Linux and Mac users can use this nvm package - https://github.com/nvm-sh/nvm
+
+// Windows users can use this nvm package - https://github.com/coreybutler/nvm-wi...
+
+// 2. Open the terminal and paste these as described:
+
+// Linux and macOS (Windows Git Bash)-
+// export NODE_OPTIONS=--openssl-legacy-provider
+
+
+// Windows command prompt-
+// set NODE_OPTIONS=--openssl-legacy-provider
+
+
+// Windows PowerShell-
+// $env:NODE_OPTIONS = "--openssl-legacy-provider"
+
+// Reference link: https://github.com/webpack/webpack/issues/14532#issuecomment-947012063
+
+
+// Stack Overflow link: https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported -->
